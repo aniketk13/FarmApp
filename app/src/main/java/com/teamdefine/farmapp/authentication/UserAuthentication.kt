@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -32,7 +31,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
@@ -49,21 +47,22 @@ class UserAuthentication : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentUserAuthenticationBinding.inflate(inflater, container, false)
-        FirebaseApp.initializeApp(requireContext())
+    ): View = FragmentUserAuthenticationBinding.inflate(inflater, container, false).also {
+        binding = it
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-        firebaseAuth = FirebaseAuth.getInstance()
-        setupComposeView()
 
-        return binding.root
+        firebaseAuth = FirebaseAuth.getInstance()
+    }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupComposeView()
     }
 
     private fun setupComposeView() {
@@ -83,7 +82,6 @@ class UserAuthentication : Fragment() {
         Surface(
             onClick = {
                 clicked = !clicked
-                Toast.makeText(requireContext(), "Logging In", Toast.LENGTH_SHORT).show()
                 signInWithGoogle()
             },
             shape = RoundedCornerShape(4.dp),
@@ -123,19 +121,18 @@ class UserAuthentication : Fragment() {
     }
 
     private fun signInWithGoogle() {
+        binding.progressBar.visibility = View.VISIBLE
         launcher.launch(googleSignInClient.signInIntent)
     }
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            Log.i("Test", "${result.resultCode}, ${Activity.RESULT_OK}")
+            Log.i("UserAuthenticateResultCode", "${result.resultCode}, ${Activity.RESULT_OK}")
             if (result.resultCode == Activity.RESULT_OK) {
-                Log.i("Test", "Inside 1")
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 firebaseAuth.fetchSignInMethodsForEmail(task.result.email.toString())
                     .addOnCompleteListener { work ->
                         if (work.isSuccessful) {
-                            Log.i("Test", "Inside 2")
                             val res = work.result?.signInMethods
                             if (res.isNullOrEmpty())
                                 handleResults(task, true)
@@ -165,7 +162,6 @@ class UserAuthentication : Fragment() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                Log.i("Test", "Inside")
                 if (saveToDB)
                     findNavController().navigate(UserAuthenticationDirections.actionUserAuthenticationToUserSelection())
                 else {
@@ -177,13 +173,13 @@ class UserAuthentication : Fragment() {
                             val doc = task.result
                             if (doc != null) {
                                 if (doc.exists()) {
-                                    Log.d("TAG", "Document already exists.")
+                                    Log.d("UserAuthenticateExists", "Document already exists.")
                                     findNavController().navigate(UserAuthenticationDirections.actionUserAuthenticationToFarmerHomeScreen())
                                 } else {
                                     findNavController().navigate(UserAuthenticationDirections.actionUserAuthenticationToBuyerHomeScreen())
                                 }
                             } else {
-                                Log.d("TAG", "Error: ", task.exception)
+                                Log.e("UserAuthenticateError", "Error: ", task.exception)
                             }
                         }
                     }
