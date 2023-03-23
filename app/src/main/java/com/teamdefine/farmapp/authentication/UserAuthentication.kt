@@ -38,14 +38,13 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.R
 import com.teamdefine.farmapp.databinding.FragmentUserAuthenticationBinding
+import com.teamdefine.farmapp.utils.Utility.toast
 
 class UserAuthentication : Fragment() {
-
-    lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentUserAuthenticationBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var viewModel: UserAuthenticationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,19 +63,10 @@ class UserAuthentication : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         setupComposeView()
 
-//        binding.button.setOnClickListener { view: View? ->
-//            Toast.makeText(requireContext(), "Logging In", Toast.LENGTH_SHORT).show()
-//            signInWithGoogle()
-//        }
-
         return binding.root
     }
 
     private fun setupComposeView() {
-//        binding.composeView.setOnClickListener { view: View? ->
-//            Toast.makeText(requireContext(), "Logging In", Toast.LENGTH_SHORT).show()
-//            signInWithGoogle()
-//        }
         binding.composeView.setContent {
             GoogleAuthenticationButton()
         }
@@ -152,11 +142,11 @@ class UserAuthentication : Fragment() {
                             else
                                 handleResults(task, false)
                         } else {
-//                            binding.progressBar.visibility = View.GONE
+                            binding.progressBar.visibility = View.GONE
                         }
                     }
             } else {
-//                binding.progressBar.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
             }
         }
 
@@ -167,7 +157,7 @@ class UserAuthentication : Fragment() {
                 updateUI(it, saveToDB)
             }
         } else {
-//            binding.progressBar.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
         }
     }
 
@@ -199,10 +189,8 @@ class UserAuthentication : Fragment() {
                     }
                 }
             } else {
-//                toast("Some error occurred")
+                toast("Some error occurred")
             }
         }
     }
-
-
 }

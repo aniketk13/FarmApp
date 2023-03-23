@@ -23,7 +23,7 @@
         android:layout_marginTop="2dp"
         android:gravity="center"
         android:padding="5dp"
-        android:text="कृषि सहयोग"
+        android:text="@string/krishi_sahyog"
         android:textColor="#24AF29"
         android:textSize="28sp" />
 
@@ -37,14 +37,6 @@
         android:layout_marginEnd="20dp"
         android:background="#E9E9E9"
         app:layout_goneMarginTop="17dp" />
-
-    <!--    <androidx.compose.ui.platform.ComposeView-->
-    <!--        android:id="@+id/composeView"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginEnd="30dp"-->
-    <!--        android:layout_height="60dp"-->
-    <!--        android:layout_below="@id/seperatorLine" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -83,6 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:indeterminateTint="#1bb3f5"
+        android:indeterminateTint="#24AF29"
         android:visibility="gone" />
 </RelativeLayout>
