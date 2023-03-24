@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.teamdefine.farmapp.splash.SplashFragment"
+        android:name="com.teamdefine.farmapp.app.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/userSelection"
-        android:name="com.teamdefine.farmapp.modeselection.UserSelection"
+        android:name="com.teamdefine.farmapp.app.onboarding.modeselection.UserSelection"
         android:label="fragment_user_selection"
         tools:layout="@layout/fragment_user_selection">
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/userAuthentication"
-        android:name="com.teamdefine.farmapp.authentication.UserAuthentication"
+        android:name="com.teamdefine.farmapp.app.onboarding.authentication.UserAuthentication"
         android:label="fragment_user_authentication"
         tools:layout="@layout/fragment_user_authentication">
         <action

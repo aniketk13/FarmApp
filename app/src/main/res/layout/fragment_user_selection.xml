@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modeselection.UserSelection">
+    tools:context=".app.onboarding.modeselection.UserSelection">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/radio_button_bg"
-                android:text="Farmer"
+                android:text="I am a farmer"
                 android:textColor="@color/black" />
 
             <RadioButton
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/radio_button_bg"
-                android:text="Buyer"
+                android:text="I am a buyer"
                 android:textColor="@color/black" />
         </RadioGroup>
 

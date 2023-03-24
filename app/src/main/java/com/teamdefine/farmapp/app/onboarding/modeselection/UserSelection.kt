@@ -1,20 +1,19 @@
-package com.teamdefine.farmapp.modeselection
+package com.teamdefine.farmapp.app.onboarding.modeselection
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentUserSelectionBinding
+import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
 class UserSelection : Fragment() {
-
     private lateinit var binding: FragmentUserSelectionBinding
     lateinit var radioButton: RadioButton
-    private lateinit var viewModel: UserSelectionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,12 +35,21 @@ class UserSelection : Fragment() {
                 val selectedButton: Int? = radioGroup.checkedRadioButtonId
                 selectedButton?.let {
                     radioButton = root.findViewById<RadioButton>(selectedButton)
-                    Toast.makeText(requireContext(), radioButton.text, Toast.LENGTH_SHORT).show()
-                    if (radioButton == binding.farmer)
-                        findNavController().navigate(UserSelectionDirections.actionUserSelectionToFarmerRegister())
-                    else if (radioButton == binding.buyer)
-                        findNavController().navigate(UserSelectionDirections.actionUserSelectionToBuyerRegistration())
-
+                    if (radioButton == binding.farmer) {
+                        startActivity(
+                            Intent(
+                                requireActivity(),
+                                MainFarmerActivity::class.java
+                            ).putExtra("isRegistered", false)
+                        )
+                    } else if (radioButton == binding.buyer) {
+                        startActivity(
+                            Intent(
+                                requireActivity(),
+                                MainBuyerActivity::class.java
+                            ).putExtra("isRegistered", false)
+                        )
+                    }
                 }
             }
         }

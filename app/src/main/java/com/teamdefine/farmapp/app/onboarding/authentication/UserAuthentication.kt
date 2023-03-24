@@ -1,6 +1,7 @@
-package com.teamdefine.farmapp.authentication
+package com.teamdefine.farmapp.app.onboarding.authentication
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,8 +36,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.R
+import com.teamdefine.farmapp.app.utils.Utility.toast
+import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentUserAuthenticationBinding
-import com.teamdefine.farmapp.utils.Utility.toast
+import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
 class UserAuthentication : Fragment() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -172,13 +175,26 @@ class UserAuthentication : Fragment() {
                         if (task.isSuccessful) {
                             val doc = task.result
                             if (doc != null) {
+                                binding.progressBar.visibility = View.GONE
                                 if (doc.exists()) {
                                     Log.d("UserAuthenticateExists", "Document already exists.")
-                                    findNavController().navigate(UserAuthenticationDirections.actionUserAuthenticationToFarmerHomeScreen())
+
+                                    startActivity(
+                                        Intent(
+                                            requireActivity(),
+                                            MainFarmerActivity::class.java
+                                        ).putExtra("isRegistered", true)
+                                    )
                                 } else {
-                                    findNavController().navigate(UserAuthenticationDirections.actionUserAuthenticationToBuyerHomeScreen())
+                                    startActivity(
+                                        Intent(
+                                            requireActivity(),
+                                            MainBuyerActivity::class.java
+                                        ).putExtra("isRegistered", true)
+                                    )
                                 }
                             } else {
+                                binding.progressBar.visibility = View.GONE
                                 Log.e("UserAuthenticateError", "Error: ", task.exception)
                             }
                         }

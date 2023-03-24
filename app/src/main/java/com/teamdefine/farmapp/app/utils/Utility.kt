@@ -1,4 +1,4 @@
-package com.teamdefine.farmapp.utils
+package com.teamdefine.farmapp.app.utils
 
 import android.content.ClipData
 import android.content.ClipboardManager
