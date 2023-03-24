@@ -42,7 +42,6 @@ import com.teamdefine.farmapp.databinding.FragmentUserAuthenticationBinding
 import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
 class UserAuthentication : Fragment() {
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentUserAuthenticationBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -58,7 +57,6 @@ class UserAuthentication : Fragment() {
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         firebaseAuth = FirebaseAuth.getInstance()
     }.root
