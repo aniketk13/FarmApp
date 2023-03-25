@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">कृषि सहयोग</string>
+    <string name="terms_and_conditions">प्रमाणित करके मैं\n<b>शर्तें &amp; स्थितियाँ </b>से सहमत हूं </string>
+</resources>
