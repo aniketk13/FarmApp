@@ -239,7 +239,7 @@ class OnBoardingFragment : Fragment() {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         alertDialog.setTitle(getString(R.string.who_are_you))
         val selections = arrayOf(getString(R.string.farmer), getString(R.string.buyer))
-        val checkedItem = 1
+        val checkedItem = 0
         alertDialog.setSingleChoiceItems(
             selections, checkedItem
         ) { dialog, option ->

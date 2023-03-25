@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/farmer_nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/farmer_nav_graph"
+    app:startDestination="@id/farmerRegistration">
 
+    <fragment
+        android:id="@+id/farmerRegistration"
+        android:name="com.teamdefine.farmapp.farmer.registration.FarmerRegistration"
+        android:label="fragment_farmer_registration"
+        tools:layout="@layout/fragment_farmer_registration" />
 </navigation>

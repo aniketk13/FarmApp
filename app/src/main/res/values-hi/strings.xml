@@ -6,5 +6,12 @@
     <string name="who_are_you">आप कौन हैं?</string>
     <string name="farmer">मैं एक किसान हूँ</string>
     <string name="buyer">मैं एक खरीदार हूँ</string>
+    <string name="fill_your_details">अपना विवरण भरें</string>
+    <string name="your_name">आपका नाम</string>
+    <string name="your_email">आपका ईमेल</string>
+    <string name="your_phone_number">आपका फोन नंबर</string>
+    <string name="upload_your_field_s_latest_soil_report">अपने खेत की नवीनतम मिट्टी की रिपोर्ट अपलोड करें</string>
+    <string name="submit">जमा करें</string>
+    <string name="your_land_size_in_acres">आपकी जमीन का आकार एकड़ में</string>
 
 </resources>

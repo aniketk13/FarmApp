@@ -8,4 +8,11 @@
     <string name="who_are_you">Who are you?</string>
     <string name="farmer">I am a farmer</string>
     <string name="buyer">I am a buyer</string>
+    <string name="fill_your_details">Fill your details</string>
+    <string name="your_name">Your name</string>
+    <string name="your_email">Your email</string>
+    <string name="your_phone_number">Your phone number</string>
+    <string name="upload_your_field_s_latest_soil_report">Upload your latest soil report</string>
+    <string name="submit">Submit</string>
+    <string name="your_land_size_in_acres">Your land size in acres</string>
 </resources>
