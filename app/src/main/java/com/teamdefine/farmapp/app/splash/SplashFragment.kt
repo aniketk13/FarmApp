@@ -1,5 +1,6 @@
 package com.teamdefine.farmapp.app.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -10,34 +11,43 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentSplashBinding
+import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
     private lateinit var firebaseAuth: FirebaseAuth //firebase auth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSplashBinding.inflate(inflater, container, false)
-        firebaseAuth = FirebaseAuth.getInstance() //getting instance
+    ): View? = FragmentSplashBinding.inflate(inflater, container, false).also {
+        binding = it
+        firebaseAuth = FirebaseAuth.getInstance()
+    }.root
 
-        val loggedIn = checkUser(firebaseAuth)
-        if (loggedIn) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val currentUser = checkUserExists(firebaseAuth)
+        if (currentUser) {
             Handler().postDelayed({
                 view?.post {
-                    val currentUser = firebaseAuth.currentUser?.uid
+                    val currentUserUID = firebaseAuth.currentUser?.uid
                     val user = FirebaseFirestore.getInstance().collection("Farmers")
-                        .document(currentUser.toString())
+                        .document(currentUserUID.toString())
                     user.get().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val doc = task.result
                             if (doc != null) {
                                 if (doc.exists()) {
                                     Log.d("TAG", "Document already exists.")
-                                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToFarmerHomeScreen())
+                                    startActivity(Intent(activity, MainFarmerActivity::class.java))
+//                                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToFarmerHomeScreen())
                                 } else {
-                                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToBuyerHomeScreen())
+                                    startActivity(Intent(activity, MainBuyerActivity::class.java))
+//                                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToBuyerHomeScreen())
                                 }
                             } else {
                                 Log.d("TAG", "Error: ", task.exception)
@@ -51,17 +61,14 @@ class SplashFragment : Fragment() {
         } else {
             Handler().postDelayed({
                 view?.post {
-//                    val intent= Intent(activity,AuthenticationActivity::class.java)
-//                    startActivity(intent)
                     findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToUserAuthentication())
                 }
             }, 3000)
         }
-
-        return binding.root
     }
 
-    fun checkUser(firebaseAuth: FirebaseAuth): Boolean {
+
+    fun checkUserExists(firebaseAuth: FirebaseAuth): Boolean {
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null)
             return true
