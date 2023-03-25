@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">Krishi Sahyog</string>
     <string name="terms_and_conditions">By authenticating i agree to the \n <b>Terms &amp; Conditions </b> </string>
+    <string name="google_authenticate_button_text">Authenticate to continue</string>
+    <string name="who_are_you">Who are you?</string>
+    <string name="farmer">I am a farmer</string>
+    <string name="buyer">I am a buyer</string>
 </resources>

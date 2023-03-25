@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">कृषि सहयोग</string>
     <string name="terms_and_conditions">प्रमाणित करके मैं\n<b>शर्तें &amp; स्थितियाँ </b>से सहमत हूं </string>
+    <string name="google_authenticate_button_text">जारी रखने के लिए प्रमाणित करें</string>
+    <string name="who_are_you">आप कौन हैं?</string>
+    <string name="farmer">मैं एक किसान हूँ</string>
+    <string name="buyer">मैं एक खरीदार हूँ</string>
+
 </resources>
