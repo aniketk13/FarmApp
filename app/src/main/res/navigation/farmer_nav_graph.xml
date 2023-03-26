@@ -9,5 +9,14 @@
         android:id="@+id/farmerRegistration"
         android:name="com.teamdefine.farmapp.farmer.registration.FarmerRegistration"
         android:label="fragment_farmer_registration"
-        tools:layout="@layout/fragment_farmer_registration" />
+        tools:layout="@layout/fragment_farmer_registration">
+        <action
+            android:id="@+id/action_farmerRegistration_to_farmerHomeScreen"
+            app:destination="@id/farmerHomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/farmerHomeScreen"
+        android:name="com.teamdefine.farmapp.farmer.home.FarmerHomeScreen"
+        android:label="fragment_farmer_home_screen"
+        tools:layout="@layout/fragment_farmer_home_screen" />
 </navigation>

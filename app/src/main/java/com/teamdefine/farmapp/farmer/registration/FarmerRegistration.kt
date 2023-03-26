@@ -14,11 +14,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.databinding.FragmentFarmerRegistrationBinding
-
+import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
 class FarmerRegistration : Fragment() {
     private lateinit var binding: FragmentFarmerRegistrationBinding
@@ -28,6 +29,10 @@ class FarmerRegistration : Fragment() {
     private lateinit var progressDialog: ProgressDialog
     private var savedDocUri: Uri? = null
 
+    private fun navigateToFarmerHomeScreen() {
+        findNavController().navigate(FarmerRegistrationDirections.actionFarmerRegistrationToFarmerHomeScreen())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +41,9 @@ class FarmerRegistration : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
         progressDialog = ProgressDialog(requireContext())
+
+        if ((activity as MainFarmerActivity).isRegistered == true)
+            navigateToFarmerHomeScreen()
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

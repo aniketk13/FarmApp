@@ -74,9 +74,9 @@ class OnBoardingFragment : Fragment() {
         mainActivityVM?.userIsFarmer?.observe(requireActivity(), Observer {
             it?.let { isFarmer ->
                 if (isFarmer) {
-                    startFarmerActivity()
+                    startFarmerActivity(true)
                 } else {
-                    startBuyerActivity()
+                    startBuyerActivity(true)
                 }
             }
         })
@@ -215,22 +215,22 @@ class OnBoardingFragment : Fragment() {
         mainActivityVM?.checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
     }
 
-    private fun startBuyerActivity() {
+    private fun startBuyerActivity(isRegistered: Boolean) {
         startActivity(
             Intent(
                 requireActivity(),
                 MainBuyerActivity::class.java
-            ).putExtra("isRegistered", true)
+            ).putExtra("isRegistered", isRegistered)
         )
         activity?.finish()
     }
 
-    private fun startFarmerActivity() {
+    private fun startFarmerActivity(isRegistered: Boolean) {
         startActivity(
             Intent(
                 requireActivity(),
                 MainFarmerActivity::class.java
-            ).putExtra("isRegistered", true)
+            ).putExtra("isRegistered", isRegistered)
         )
         activity?.finish()
     }
@@ -245,10 +245,10 @@ class OnBoardingFragment : Fragment() {
         ) { dialog, option ->
             when (option) {
                 0 -> {
-                    startFarmerActivity()
+                    startFarmerActivity(false)
                 }
                 1 -> {
-                    startBuyerActivity()
+                    startBuyerActivity(false)
                 }
             }
         }

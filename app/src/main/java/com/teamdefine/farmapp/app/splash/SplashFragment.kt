@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.MainActivity
 import com.teamdefine.farmapp.MainActivityVM
+import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentSplashBinding
 import com.teamdefine.farmapp.farmer.MainFarmerActivity
 
@@ -23,8 +24,7 @@ class SplashFragment : Fragment() {
     var mainActivityVM: MainActivityVM? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? = FragmentSplashBinding.inflate(inflater, container, false).also {
         binding = it
         firebaseAuth = FirebaseAuth.getInstance()
@@ -35,7 +35,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
-
         val currentUser = checkUserExists(firebaseAuth)
         if (currentUser) {
             checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
@@ -59,19 +58,22 @@ class SplashFragment : Fragment() {
     }
 
     private fun checkIfUserIsFarmerOrBuyer(
-        firebaseAuth: FirebaseAuth,
-        firebaseFirestore: FirebaseFirestore
+        firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore
     ) {
         mainActivityVM?.checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
     }
 
     private fun startBuyerActivity() {
-        startActivity(Intent(activity, MainFarmerActivity::class.java))
+        startActivity(
+            Intent(activity, MainBuyerActivity::class.java).putExtra("isRegistered", true)
+        )
         activity?.finish()
     }
 
     private fun startFarmerActivity() {
-        startActivity(Intent(activity, MainFarmerActivity::class.java))
+        startActivity(
+            Intent(activity, MainFarmerActivity::class.java).putExtra("isRegistered", true)
+        )
         activity?.finish()
     }
 
@@ -84,8 +86,7 @@ class SplashFragment : Fragment() {
 
     private fun checkUserExists(firebaseAuth: FirebaseAuth): Boolean {
         val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null)
-            return true
+        if (firebaseUser != null) return true
         return false
     }
 }
