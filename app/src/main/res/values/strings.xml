@@ -11,7 +11,8 @@
     <string name="your_name">Your name</string>
     <string name="your_email">Your email</string>
     <string name="your_phone_number">Your phone number</string>
-    <string name="upload_your_field_s_latest_soil_report">Upload your latest soil report</string>
+    <string name="upload_your_field_s_latest_soil_report">Latest soil report</string>
     <string name="submit">Submit</string>
     <string name="your_land_size_in_acres">Your land size in acres</string>
+    <string name="upload_report">Upload report</string>
 </resources>

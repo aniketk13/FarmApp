@@ -15,9 +15,13 @@ class FarmerRegistrationVM : ViewModel() {
     val savedDocUri: LiveData<Uri>
         get() = _savedDocUri
 
-    private val _savedFarmerSuccess: MutableLiveData<Boolean> = MutableLiveData(false)
-    val savedFarmerSuccess: LiveData<Boolean>
+    private val _savedFarmerSuccess: MutableLiveData<Boolean?> = MutableLiveData(null)
+    val savedFarmerSuccess: LiveData<Boolean?>
         get() = _savedFarmerSuccess
+
+    private val _progressDialog: MutableLiveData<Boolean?> = MutableLiveData(null)
+    val progressDialog: LiveData<Boolean?>
+        get() = _progressDialog
 
     fun saveSoilReportToStorage(fileName: String?, fileUri: Uri) {
         val storageRef = Firebase.storage.reference.child("farmer/$fileName")
@@ -27,9 +31,11 @@ class FarmerRegistrationVM : ViewModel() {
                 Log.i("FarmerRegistrationVM SaveFile", "Saved User")
                 storageRef.downloadUrl.addOnSuccessListener {
                     _savedDocUri.postValue(it)
+                    _progressDialog.postValue(false)
                 }
             }
             .addOnFailureListener { exception ->
+                _progressDialog.postValue(false)
                 Log.e("FarmerRegistrationVM SaveFileError", exception.toString())
             }
     }

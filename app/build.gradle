@@ -112,7 +112,6 @@ dependencies {
     }
 
     //to load images from url
-
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
     implementation "com.squareup.picasso:picasso:2.4.0"
     implementation "com.squareup.okhttp:okhttp:2.7.5"
