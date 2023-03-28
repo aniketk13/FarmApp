@@ -16,4 +16,9 @@
     <string name="submit">Submit</string>
     <string name="your_land_size_in_acres">Your land size in acres</string>
     <string name="upload_report">Upload report</string>
+    <string name="hello">Hello,</string>
+    <string name="deals_closed">Closed Deals</string>
+    <string name="active_deals">Active Deals</string>
+    <string name="current_listings">Current crop listings</string>
+    <string name="price">Price:</string>
 </resources>

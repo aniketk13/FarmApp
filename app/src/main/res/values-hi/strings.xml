@@ -14,5 +14,10 @@
     <string name="submit">जमा करें</string>
     <string name="your_land_size_in_acres">आपकी जमीन का आकार एकड़ में</string>
     <string name="upload_report">रिपोर्ट अपलोड करें</string>
+    <string name="hello">नमस्ते,</string>
+    <string name="deals_closed">बंद सौदे</string>
+    <string name="active_deals">सक्रिय सौदे</string>
+    <string name="current_listings">वर्तमान फसल लिस्टिंग</string>
+    <string name="price">कीमत:</string>
 
 </resources>
