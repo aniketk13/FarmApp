@@ -15,7 +15,7 @@ import com.teamdefine.farmapp.MainActivity
 import com.teamdefine.farmapp.MainActivityVM
 import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentSplashBinding
-import com.teamdefine.farmapp.farmer.MainFarmerActivity
+import com.teamdefine.farmapp.farmer.main.MainFarmerActivity
 
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding

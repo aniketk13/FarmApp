@@ -42,7 +42,7 @@ import com.teamdefine.farmapp.R
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentOnBoardingBinding
-import com.teamdefine.farmapp.farmer.MainFarmerActivity
+import com.teamdefine.farmapp.farmer.main.MainFarmerActivity
 
 
 class OnBoardingFragment : Fragment() {

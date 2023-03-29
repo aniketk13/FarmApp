@@ -17,8 +17,13 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".farmer.MainFarmerActivity"
+            android:name=".farmer.main.MainFarmerActivity"
             android:exported="false">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -42,3 +47,9 @@
     </application>
 
 </manifest>
+
+    <!--<intent-filter>-->
+    <!--<action android:name="android.intent.action.MAIN" />-->
+
+    <!--<category android:name="android.intent.category.LAUNCHER" />-->
+    <!--</intent-filter>-->

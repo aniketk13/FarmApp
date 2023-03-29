@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.databinding.FragmentFarmerRegistrationBinding
-import com.teamdefine.farmapp.farmer.MainFarmerActivity
+import com.teamdefine.farmapp.farmer.main.MainFarmerActivity
 
 class FarmerRegistration : Fragment() {
     private lateinit var binding: FragmentFarmerRegistrationBinding
@@ -110,8 +110,10 @@ class FarmerRegistration : Fragment() {
             farmer["Name"] = it.displayName.toString()
             farmer["Email"] = it.email.toString()
             farmer["MobileNumber"] = "+91-${binding.inputPhone.text}"
-            farmer["LandSize"] = binding.inputLandSize.text.toString()
+            farmer["LandSize"] = binding.inputLandSize.text
             farmer["SoilReportURI"] = savedDocUri.toString()
+            farmer["ClosedDeals"] = 0
+            farmer["ActiveDeals"] = 0
 
             saveFarmerToDatabase(farmer)
         }
