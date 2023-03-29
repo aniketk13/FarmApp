@@ -19,5 +19,6 @@
     <string name="active_deals">सक्रिय सौदे</string>
     <string name="current_listings">वर्तमान फसल लिस्टिंग</string>
     <string name="price">कीमत:</string>
+    <string name="create_a_new_crop_listing">एक नई फसल सूची बनाएँ</string>
 
 </resources>

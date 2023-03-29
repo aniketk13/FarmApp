@@ -132,7 +132,7 @@ class FarmerRegistration : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != RESULT_CANCELED) {
-            showProgressDialog("Uploading..")
+            showProgressDialog("Uploading...")
             val fileUri = data?.data
             val returnCursor: Cursor? =
                 fileUri?.let {

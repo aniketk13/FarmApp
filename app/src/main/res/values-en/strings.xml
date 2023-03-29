@@ -19,4 +19,5 @@
     <string name="active_deals">Active Deals</string>
     <string name="current_listings">Current crop listings</string>
     <string name="price">Price:</string>
+    <string name="create_a_new_crop_listing">Create a new crop listing</string>
 </resources>

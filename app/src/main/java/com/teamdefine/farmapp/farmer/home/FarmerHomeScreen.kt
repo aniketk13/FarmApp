@@ -56,7 +56,11 @@ class FarmerHomeScreen : Fragment() {
     }
 
     private fun initClickListeners() {
-//        TODO("Not yet implemented")
+        binding.apply {
+            addButton.setOnClickListener {
+
+            }
+        }
     }
 
     private fun initViews() {
