@@ -17,7 +17,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cropIvCv"
             android:layout_width="105dp"
-            android:layout_height="105dp"
+            android:layout_height="100dp"
             android:layout_margin="6dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
@@ -90,67 +90,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/cropIv"-->
-        <!--            android:layout_width="105dp"-->
-        <!--            android:layout_height="105dp"-->
-        <!--            android:layout_margin="5dp"-->
-        <!--            android:src="@drawable/ic_launcher_foreground"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                    android:id="@+id/cv1"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="0dp"-->
-        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                    app:layout_constraintStart_toEndOf="@id/cropIv"-->
-        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginStart="10dp"-->
-        <!--            android:gravity="center_vertical"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/cropIv"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--            <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                android:id="@+id/cropNameTv"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:fontFamily="@font/noto_devnagri"-->
-        <!--                android:padding="5dp"-->
-        <!--                android:text="Basmati - Whole"-->
-        <!--                android:textColor="@color/black"-->
-        <!--                android:textSize="14sp" />-->
-
-        <!--            <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                android:id="@+id/dateTv"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:fontFamily="@font/noto_devnagri"-->
-        <!--                android:padding="5dp"-->
-        <!--                android:text="19th March, 2023"-->
-        <!--                android:textColor="@color/black"-->
-        <!--                android:textSize="10sp" />-->
-
-        <!--            <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                android:id="@+id/currentPriceTv"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:fontFamily="@font/noto_devnagri"-->
-        <!--                android:padding="5dp"-->
-        <!--                android:text="Current: ₹15,000/quintal"-->
-        <!--                android:textColor="#24AF29"-->
-        <!--                android:textSize="14sp" />-->
-        <!--        </LinearLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -61,6 +61,7 @@ class FarmerRegistration : Fragment() {
             savedFarmerSuccess?.let {
                 if (it) {
                     binding.progressBar.visibility = View.GONE
+                    navigateToFarmerHomeScreen()
                     toast("Farmer saved to DB")
                 } else {
                     toast("Some error occoured")
