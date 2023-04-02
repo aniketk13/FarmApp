@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -25,7 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.app.utils.Utility
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.databinding.FragmentCreateNewCropListingBinding
-import com.teamdefine.farmapp.farmer.main.MainFarmerActivity
 import com.teamdefine.farmapp.farmer.main.MainFarmerVM
 
 class CreateNewCropListing : Fragment() {
@@ -34,7 +34,7 @@ class CreateNewCropListing : Fragment() {
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var progressDialog: ProgressDialog
     private val viewModel: CreateNewCropVM by viewModels()
-    private lateinit var mainFarmerVM: MainFarmerVM
+    private val mainFarmerVM: MainFarmerVM by activityViewModels()
     private var savedDocUri: Uri? = null
 
     override fun onCreateView(
@@ -46,7 +46,6 @@ class CreateNewCropListing : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFirestore = FirebaseFirestore.getInstance()
         progressDialog = ProgressDialog(requireContext())
-        mainFarmerVM = (activity as MainFarmerActivity).mainFarmerVM
     }.root
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -112,24 +111,21 @@ class CreateNewCropListing : Fragment() {
         viewModel.savedCropSuccess.observe(requireActivity(), Observer { cropSaved ->
             cropSaved?.let {
                 if (it) {
-                    binding.progressBar.visibility = View.GONE
-                    navigateBackToFarmerHomeFragment()
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                    toast("Seems like our servers are down. Try again later.")
-                    navigateBackToFarmerHomeFragment()
+                    mainFarmerVM.updateActiveCropsByOne(firebaseAuth, firebaseFirestore)
                 }
             }
         })
-        mainFarmerVM.updatedActiveDeals.observe(requireActivity(), Observer { activeCropsUpdated ->
+        mainFarmerVM.updatedActiveDeals.observe(viewLifecycleOwner, Observer { activeCropsUpdated ->
             activeCropsUpdated?.let {
-                if (it) {
-                    binding.progressBar.visibility = View.GONE
-                    navigateBackToFarmerHomeFragment()
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                    toast("Seems like our servers are down. Try again later.")
-                    navigateBackToFarmerHomeFragment()
+                it.getContentIfNotHandled()?.let { content ->
+                    if (content) {
+                        binding.progressBar.visibility = View.GONE
+                        navigateBackToFarmerHomeFragment()
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                        toast("Seems like our servers are down. Try again later.")
+                        navigateBackToFarmerHomeFragment()
+                    }
                 }
             }
         })

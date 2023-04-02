@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.teamdefine.farmapp.app.utils.Event
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
 import com.teamdefine.farmapp.farmer.models.FarmerData
 
@@ -17,8 +17,8 @@ class MainFarmerVM : ViewModel() {
     val farmerData: LiveData<FarmerData?>
         get() = _farmerData
 
-    private val _updatedActiveDeals: MutableLiveData<Boolean?> = MutableLiveData(null)
-    val updatedActiveDeals: LiveData<Boolean?>
+    private val _updatedActiveDeals: MutableLiveData<Event<Boolean>?> = MutableLiveData(null)
+    val updatedActiveDeals: LiveData<Event<Boolean>?>
         get() = _updatedActiveDeals
 
     private val _farmerCrops: MutableLiveData<ArrayList<FarmerCrops>?> =
@@ -52,13 +52,13 @@ class MainFarmerVM : ViewModel() {
                     firebaseFirestore.collection("Farmers")
                         .document(firebaseAuth.currentUser?.uid.toString())
                         .update("ActiveDeals", currentActiveDeals + 1).addOnSuccessListener {
-                            _updatedActiveDeals.postValue(true)
+                            _updatedActiveDeals.value = Event(true)
                         }
                         .addOnFailureListener {
-                            _updatedActiveDeals.postValue(false)
+                            _updatedActiveDeals.value = Event(false)
                         }
                 } else {
-                    _updatedActiveDeals.postValue(false)
+                    _updatedActiveDeals.value = Event(false)
                 }
             }
     }

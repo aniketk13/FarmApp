@@ -51,30 +51,11 @@ class CreateNewCropVM : ViewModel() {
             .set(crop)
             .addOnSuccessListener {
                 Log.i("FarmerRegistrationVM SaveUser", "Farmer Save Success")
-                updateActiveCropsByOne(firebaseAuth, firebaseFirestore)
+                _savedCropSuccess.postValue(true)
             }
             .addOnFailureListener {
                 _savedCropSuccess.postValue(false)
                 Log.e("FarmerRegistrationVM SaveUserError", it.toString())
-            }
-    }
-
-    fun updateActiveCropsByOne(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore) {
-        firebaseFirestore.collection("Farmers").document(firebaseAuth.currentUser?.uid.toString())
-            .get().addOnSuccessListener { document ->
-                if (document != null) {
-                    val currentActiveDeals: Long = document.get("ActiveDeals") as Long
-                    firebaseFirestore.collection("Farmers")
-                        .document(firebaseAuth.currentUser?.uid.toString())
-                        .update("ActiveDeals", currentActiveDeals + 1).addOnSuccessListener {
-                            _savedCropSuccess.postValue(true)
-                        }
-                        .addOnFailureListener {
-                            _savedCropSuccess.postValue(false)
-                        }
-                } else {
-                    _savedCropSuccess.postValue(false)
-                }
             }
     }
 }
