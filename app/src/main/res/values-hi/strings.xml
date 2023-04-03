@@ -13,13 +13,18 @@
     <string name="upload_your_field_s_latest_soil_report">नवीनतम मिट्टी की रिपोर्ट</string>
     <string name="submit">जमा करें</string>
     <string name="your_land_size_in_acres">आपकी जमीन का आकार एकड़ में</string>
-    <string name="upload_report">रिपोर्ट अपलोड करें</string>
+    <string name="upload_report">अपलोड करें</string>
     <string name="hello">नमस्ते,</string>
     <string name="deals_closed">बंद सौदे</string>
     <string name="active_deals">सक्रिय सौदे</string>
     <string name="current_listings">वर्तमान फसल लिस्टिंग</string>
     <string name="price">कीमत:</string>
     <string name="create_a_new_crop_listing">एक नई फसल सूची बनाएँ</string>
+    <string name="crop_name">फसल का नाम</string>
+    <string name="offer_price">रखी गयी क़ीमत</string>
+    <string name="images">फसल की तस्वीरें</string>
+    <string name="add_crop_to_listing">लिस्टिंग में फसल जोड़ें</string>
+    <string name="quintal">क्विंटल</string>
     <string name="personal_id_card">व्यक्तिगत पहचान पत्र</string>
 
 </resources>
