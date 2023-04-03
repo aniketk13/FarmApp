@@ -54,7 +54,7 @@ class FarmerHomeScreen : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("FragmentHomeScreen", "OnCreateView")
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 activity?.finish()
             }
@@ -116,7 +116,7 @@ class FarmerHomeScreen : Fragment() {
         }
         binding.cropRecyclerView.adapter = adapter
         binding.cropRecyclerView.layoutManager = LinearLayoutManager(activity)
-        if(binding.swipeRefresh.isRefreshing)
+        if (binding.swipeRefresh.isRefreshing)
             binding.swipeRefresh.isRefreshing = false
     }
 
@@ -135,7 +135,7 @@ class FarmerHomeScreen : Fragment() {
             addButton.setOnClickListener {
                 navigateToAddCropListingFragment()
             }
-            swipeRefresh.setOnRefreshListener{
+            swipeRefresh.setOnRefreshListener {
                 getFarmerData()
             }
         }

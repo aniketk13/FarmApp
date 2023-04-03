@@ -26,4 +26,7 @@
     <string name="images">Images of crop</string>
     <string name="add_crop_to_listing">Add crop to listing</string>
     <string name="quintal">quintal</string>
+    <string name="set_app_language">Set App Language</string>
+    <string name="app_language">App Language</string>
+    <string name="select_your_preferred_language">Select your preferred language</string>
 </resources>

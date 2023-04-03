@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -51,6 +52,10 @@ class OnBoardingFragment : Fragment() {
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var googleSignInClient: GoogleSignInClient
     var mainActivityVM: MainActivityVM? = null
+    var languagePref: String? = null
+    private val args: OnBoardingFragmentArgs by navArgs()
+    var isUserFarmer = false
+    var isUserBuyer = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +66,7 @@ class OnBoardingFragment : Fragment() {
         firebaseFirestore = FirebaseFirestore.getInstance()
         initializeGoogleAuthentication()
         mainActivityVM = (activity as MainActivity).mainActivityVM
+        languagePref = args.languagePref
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,9 +80,21 @@ class OnBoardingFragment : Fragment() {
         mainActivityVM?.userIsFarmer?.observe(requireActivity(), Observer {
             it?.let { isFarmer ->
                 if (isFarmer) {
-                    startFarmerActivity(true)
+                    isUserFarmer = true
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Farmer")
                 } else {
-                    startBuyerActivity(true)
+                    isUserBuyer = true
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Buyer")
+                }
+            }
+        })
+
+        mainActivityVM?.userLanguagePref?.observe(requireActivity(), Observer { languagePref ->
+            languagePref?.let {
+                if (isUserFarmer) {
+                    startFarmerActivity(true, languagePref)
+                } else {
+                    startBuyerActivity(true, languagePref)
                 }
             }
         })
@@ -88,6 +106,14 @@ class OnBoardingFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun getLanguagePreference(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore,
+        userType: String
+    ) {
+        mainActivityVM?.getLanguagePreference(firebaseAuth, firebaseFirestore, userType)
     }
 
     private fun setupComposeView() {
@@ -215,22 +241,22 @@ class OnBoardingFragment : Fragment() {
         mainActivityVM?.checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
     }
 
-    private fun startBuyerActivity(isRegistered: Boolean) {
+    private fun startBuyerActivity(isRegistered: Boolean, languagePreference: String?) {
         startActivity(
             Intent(
                 requireActivity(),
                 MainBuyerActivity::class.java
-            ).putExtra("isRegistered", isRegistered)
+            ).putExtra("isRegistered", isRegistered).putExtra("languagePref", languagePreference)
         )
         activity?.finish()
     }
 
-    private fun startFarmerActivity(isRegistered: Boolean) {
+    private fun startFarmerActivity(isRegistered: Boolean, languagePreference: String?) {
         startActivity(
             Intent(
                 requireActivity(),
                 MainFarmerActivity::class.java
-            ).putExtra("isRegistered", isRegistered)
+            ).putExtra("isRegistered", isRegistered).putExtra("languagePref", languagePreference)
         )
         activity?.finish()
     }
@@ -245,10 +271,10 @@ class OnBoardingFragment : Fragment() {
         ) { dialog, option ->
             when (option) {
                 0 -> {
-                    startFarmerActivity(false)
+                    startFarmerActivity(false, languagePref)
                 }
                 1 -> {
-                    startBuyerActivity(false)
+                    startBuyerActivity(false, languagePref)
                 }
             }
         }

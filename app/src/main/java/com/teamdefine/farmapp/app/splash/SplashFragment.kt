@@ -22,6 +22,8 @@ class SplashFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
     var mainActivityVM: MainActivityVM? = null
+    var isUserFarmer = false
+    var isUserBuyer = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,22 +41,49 @@ class SplashFragment : Fragment() {
         if (currentUser) {
             checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
         } else {
-            navigateToOnBoardingFragment()
+            navigateToLanguageSelectionFragment()
+//            navigateToOnBoardingFragment()
         }
+    }
+
+    private fun navigateToLanguageSelectionFragment() {
+        Handler().postDelayed({
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLanguageSelectionFragment())
+        }, 2000)
     }
 
     private fun initObservers() {
         mainActivityVM?.userIsFarmer?.observe(requireActivity(), Observer {
             it?.let { isFarmer ->
+                if (isFarmer) {
+                    isUserFarmer = true
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Farmers")
+                } else {
+                    isUserBuyer = true
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Buyers")
+                }
+            }
+        })
+
+        mainActivityVM?.userLanguagePref?.observe(requireActivity(), Observer { languagePref ->
+            languagePref?.let {
                 Handler().postDelayed({
-                    if (isFarmer) {
-                        startFarmerActivity()
+                    if (isUserFarmer) {
+                        startFarmerActivity(it)
                     } else {
-                        startBuyerActivity()
+                        startBuyerActivity(it)
                     }
                 }, 2000)
             }
         })
+    }
+
+    private fun getLanguagePreference(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore,
+        userType: String
+    ) {
+        mainActivityVM?.getLanguagePreference(firebaseAuth, firebaseFirestore, userType)
     }
 
     private fun checkIfUserIsFarmerOrBuyer(
@@ -63,16 +92,18 @@ class SplashFragment : Fragment() {
         mainActivityVM?.checkIfUserIsFarmerOrBuyer(firebaseAuth, firebaseFirestore)
     }
 
-    private fun startBuyerActivity() {
+    private fun startBuyerActivity(languagePref: String?) {
         startActivity(
             Intent(activity, MainBuyerActivity::class.java).putExtra("isRegistered", true)
+                .putExtra("languagePref", languagePref)
         )
         activity?.finish()
     }
 
-    private fun startFarmerActivity() {
+    private fun startFarmerActivity(languagePref: String?) {
         startActivity(
             Intent(activity, MainFarmerActivity::class.java).putExtra("isRegistered", true)
+                .putExtra("languagePref", languagePref)
         )
         activity?.finish()
     }
@@ -81,7 +112,6 @@ class SplashFragment : Fragment() {
         Handler().postDelayed({
             findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnBoardingFragment())
         }, 2000)
-
     }
 
     private fun checkUserExists(firebaseAuth: FirebaseAuth): Boolean {

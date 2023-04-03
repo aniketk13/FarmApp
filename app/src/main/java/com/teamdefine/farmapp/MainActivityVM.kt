@@ -16,6 +16,11 @@ class MainActivityVM : ViewModel() {
     val progressLoad: LiveData<Boolean?>
         get() = _progressLoad
 
+    private val _userLanguagePref: MutableLiveData<String?> =
+        MutableLiveData(null)
+    val userLanguagePref: LiveData<String?>
+        get() = _userLanguagePref
+
     fun checkIfUserIsFarmerOrBuyer(
         firebaseAuth: FirebaseAuth,
         firebaseFirestore: FirebaseFirestore
@@ -29,7 +34,6 @@ class MainActivityVM : ViewModel() {
                 val doc = task.result
                 if (doc != null) {
                     Log.d("MainActivityVM Auth", "Document already exists.")
-                    _progressLoad.postValue(false)
                     if (doc.exists()) {
                         _userIsFarmer.postValue(true)
                     } else {
@@ -41,5 +45,21 @@ class MainActivityVM : ViewModel() {
                 }
             }
         }
+    }
+
+    fun getLanguagePreference(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore,
+        userType: String
+    ) {
+        firebaseFirestore.collection(userType).document(firebaseAuth.currentUser?.uid.toString())
+            .get().addOnSuccessListener { document ->
+                val languagePref: String = document.get("LanguagePreference") as String
+                _progressLoad.postValue(false)
+                _userLanguagePref.postValue(languagePref)
+            }.addOnFailureListener {
+                _progressLoad.postValue(false)
+                Log.e("MainActivityVM Auth", "Error: ", it)
+            }
     }
 }
