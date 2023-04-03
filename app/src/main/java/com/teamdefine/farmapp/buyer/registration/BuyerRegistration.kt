@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,10 +20,11 @@ import com.teamdefine.farmapp.R
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentBuyerRegistrationBinding
+import com.teamdefine.farmapp.farmer.registration.FarmerRegistrationVM
 
 class BuyerRegistration : Fragment() {
 
-   private lateinit var viewModel:BuyerRegistrationVM
+    private val buyerRegistrationVM: BuyerRegistrationVM by viewModels()
     private lateinit var binding: FragmentBuyerRegistrationBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseFirestore: FirebaseFirestore
@@ -52,8 +54,20 @@ class BuyerRegistration : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.savedDocUri.observe(requireActivity()) {
+        buyerRegistrationVM.savedDocUri.observe(requireActivity()) {
             buyerDocUri=it
+        }
+
+        buyerRegistrationVM.savedBuyerSuccess.observe(requireActivity()){
+            it?.let {
+                if (it) {
+                    binding.progressBar.visibility = View.GONE
+                    toast("Buyer saved to DB")
+                    navigateToHomeScreen()
+                } else {
+                    toast("Some error occoured")
+                }
+            }
         }
     }
 
@@ -70,7 +84,7 @@ class BuyerRegistration : Fragment() {
                     toast("All fields are mandatory")
                 }
                 else if(buyerDocUri==null){
-                    toast("Upload your soil reports first")
+                    toast("Upload your ID first")
                 }
                 else
                     saveUserToDataBase()
@@ -86,11 +100,15 @@ class BuyerRegistration : Fragment() {
             buyer["Email"] = it.email.toString()
             buyer["MobileNumber"] = "+91-${binding.inputPhone.text}"
             buyer["Personal ID"] = buyerDocUri.toString()
-            buyer["ClosedDeals"] = 0
-            buyer["ActiveDeals"] = 0
+            buyer["ClosedBids"] = 0
+            buyer["ActiveBids"] = 0
 
-            saveFarmerToDatabase(farmer)
+            saveBuyerToDatabase(buyer)
         }
+    }
+
+    private fun saveBuyerToDatabase(currentBuyer: MutableMap<String, Any>) {
+        buyerRegistrationVM.saveBuyerToDatabase(currentBuyer, firebaseFirestore, firebaseAuth)
     }
 
     private fun uploadDocument() {
@@ -117,7 +135,7 @@ class BuyerRegistration : Fragment() {
         }
     }
     private fun saveFileToStorage(fileName: String?, fileUri: Uri) {
-        viewModel.saveIdCard(fileName, fileUri)
+        buyerRegistrationVM.saveIdCard(fileName, fileUri)
     }
 
     private fun showProgressDialog(message: String) {
