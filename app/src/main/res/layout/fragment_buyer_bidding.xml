@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".buyer.bidding.BuyerBidding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/mainIv"
         android:layout_width="300dp"
         android:layout_height="200dp"
@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_devnagri"
         android:text="Basmati Kheer"
-        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +46,6 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/noto_devnagri"
         android:text="Set new price "
-        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

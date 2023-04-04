@@ -68,7 +68,7 @@ class BuyerHomeScreen : Fragment() {
         }
     }
 
-    private fun setUpDataInRecyclerView(farmerCrops: ArrayList<Map<String,FarmerCrops>>) {
+    private fun setUpDataInRecyclerView(farmerCrops: ArrayList<Map<String, FarmerCrops>>) {
         adapter = activity?.let {
             BuyerHomeScreenAdapter(
                 it,
@@ -86,7 +86,11 @@ class BuyerHomeScreen : Fragment() {
     }
 
     private fun navigateToBiddingScreen(clickedCropKey: String) {
-        findNavController().navigate(BuyerHomeScreenDirections.actionBuyerHomeScreenToBuyerBidding(clickedCropKey))
+        findNavController().navigate(
+            BuyerHomeScreenDirections.actionBuyerHomeScreenToBuyerBidding(
+                clickedCropKey
+            )
+        )
     }
 
     private fun initClickListeners() {

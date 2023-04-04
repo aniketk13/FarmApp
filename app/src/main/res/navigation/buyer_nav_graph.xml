@@ -27,9 +27,12 @@
         android:id="@+id/buyerBidding"
         android:name="com.teamdefine.farmapp.buyer.bidding.BuyerBidding"
         android:label="fragment_buyer_bidding"
-        tools:layout="@layout/fragment_buyer_bidding" >
+        tools:layout="@layout/fragment_buyer_bidding">
         <argument
             android:name="cropKey"
             app:argType="string" />
+        <action
+            android:id="@+id/action_buyerBidding_to_buyerHomeScreen"
+            app:destination="@id/buyerHomeScreen" />
     </fragment>
 </navigation>

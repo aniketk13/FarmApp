@@ -14,7 +14,7 @@ import com.teamdefine.farmapp.farmer.models.FarmerCrops
 
 class BuyerHomeScreenAdapter(
     private val context: Context,
-    private val farmerCrops: ArrayList<Map<String,FarmerCrops>>,
+    private val farmerCrops: ArrayList<Map<String, FarmerCrops>>,
     private val clickListener: ItemClickListener
 ) :
     RecyclerView.Adapter<BuyerHomeScreenAdapter.ViewHolder>() {
@@ -40,8 +40,8 @@ class BuyerHomeScreenAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentEntry = farmerCrops[position]
-        val key=currentEntry.keys.elementAt(0)
-        val currentFarmerCrop=currentEntry.get(key)
+        val key = currentEntry.keys.elementAt(0)
+        val currentFarmerCrop = currentEntry.get(key)
         currentFarmerCrop?.let {
             holder.cropNameTv.text = it.CropName
             holder.dateTv.text = it.CropListingDate.toString()
