@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.teamdefine.farmapp.buyer.models.BuyerData
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
 
@@ -27,6 +28,7 @@ class BuyerHomeScreenViewModel : ViewModel() {
                     val farmersCrops: ArrayList<FarmerCrops> = arrayListOf()
                     for (document in task.result) {
                         farmersCrops.add(document.toObject(FarmerCrops::class.java))
+                        Log.i("Crop Id",document.id)
                     }
                     _farmerCrops.postValue(farmersCrops)
 

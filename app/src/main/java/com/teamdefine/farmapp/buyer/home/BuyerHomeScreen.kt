@@ -75,6 +75,7 @@ class BuyerHomeScreen : Fragment() {
                 object : BuyerHomeScreenAdapter.ItemClickListener {
                     override fun onItemClickListener(clickedFarmerCrop: FarmerCrops) {
                         toast("Item Clicked")
+//                        navigateToBiddingScreen()
                     }
                 })
         }

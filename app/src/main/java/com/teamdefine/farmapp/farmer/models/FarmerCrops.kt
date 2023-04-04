@@ -13,6 +13,8 @@ class FarmerCrops {
         private set
     var FarmerUID: String? = null
         private set
+//    var CropUID:String?=null
+//        private set
 
     init {
         this.CropImageURI = CropImageURI
@@ -21,5 +23,6 @@ class FarmerCrops {
         this.CropOfferPrice = CropOfferPrice
         this.FarmerName = FarmerName
         this.FarmerUID = FarmerUID
+//        this.CropUID=CropUID
     }
 }
