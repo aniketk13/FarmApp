@@ -47,6 +47,9 @@ class BuyerHomeScreenAdapter(
                 com.teamdefine.farmapp.R.string.quintal
             )
         }"
+        holder.itemView.setOnClickListener {
+            clickListener.onItemClickListener(currentFarmerCrop)
+        }
 
         context.loadImageUsingGlide(currentFarmerCrop.CropImageURI.toString(), holder.cropIv)
     }
