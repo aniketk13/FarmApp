@@ -14,13 +14,13 @@ import com.teamdefine.farmapp.farmer.models.FarmerCrops
 
 class BuyerHomeScreenAdapter(
     private val context: Context,
-    private val farmerCrops: ArrayList<FarmerCrops>,
+    private val farmerCrops: ArrayList<Map<String,FarmerCrops>>,
     private val clickListener: ItemClickListener
 ) :
     RecyclerView.Adapter<BuyerHomeScreenAdapter.ViewHolder>() {
 
     interface ItemClickListener {
-        fun onItemClickListener(clickedFarmerCrop: FarmerCrops)
+        fun onItemClickListener(clickedCropKey: String)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,19 +39,22 @@ class BuyerHomeScreenAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentFarmerCrop = farmerCrops[position]
-        holder.cropNameTv.text = currentFarmerCrop.CropName.toString()
-        holder.dateTv.text = currentFarmerCrop.CropListingDate.toString()
-        holder.priceTv.text = "₹ ${currentFarmerCrop.CropOfferPrice}/ ${
-            context.resources.getString(
-                com.teamdefine.farmapp.R.string.quintal
-            )
-        }"
-        holder.itemView.setOnClickListener {
-            clickListener.onItemClickListener(currentFarmerCrop)
+        val currentEntry = farmerCrops[position]
+        val key=currentEntry.keys.elementAt(0)
+        val currentFarmerCrop=currentEntry.get(key)
+        currentFarmerCrop?.let {
+            holder.cropNameTv.text = it.CropName
+            holder.dateTv.text = it.CropListingDate.toString()
+            holder.priceTv.text = "₹ ${it.CropOfferPrice}/ ${
+                context.resources.getString(
+                    com.teamdefine.farmapp.R.string.quintal
+                )
+            }"
+            holder.itemView.setOnClickListener {
+                clickListener.onItemClickListener(key)
+            }
+            context.loadImageUsingGlide(it.CropImageURI.toString(), holder.cropIv)
         }
-
-        context.loadImageUsingGlide(currentFarmerCrop.CropImageURI.toString(), holder.cropIv)
     }
 
     override fun getItemCount() = farmerCrops.size

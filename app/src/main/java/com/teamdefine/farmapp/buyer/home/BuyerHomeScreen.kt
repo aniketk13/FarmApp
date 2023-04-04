@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -67,21 +68,25 @@ class BuyerHomeScreen : Fragment() {
         }
     }
 
-    private fun setUpDataInRecyclerView(farmerCrops: ArrayList<FarmerCrops>) {
+    private fun setUpDataInRecyclerView(farmerCrops: ArrayList<Map<String,FarmerCrops>>) {
         adapter = activity?.let {
             BuyerHomeScreenAdapter(
                 it,
                 farmerCrops,
                 object : BuyerHomeScreenAdapter.ItemClickListener {
-                    override fun onItemClickListener(clickedFarmerCrop: FarmerCrops) {
+                    override fun onItemClickListener(clickedCropKey: String) {
                         toast("Item Clicked")
-//                        navigateToBiddingScreen()
+                        navigateToBiddingScreen(clickedCropKey)
                     }
                 })
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
 
+    }
+
+    private fun navigateToBiddingScreen(clickedCropKey: String) {
+        findNavController().navigate(BuyerHomeScreenDirections.actionBuyerHomeScreenToBuyerBidding(clickedCropKey))
     }
 
     private fun initClickListeners() {

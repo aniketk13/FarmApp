@@ -16,19 +16,19 @@ class BuyerHomeScreenViewModel : ViewModel() {
     val buyerData: LiveData<BuyerData?>
         get() = _buyerData
 
-    private val _farmerCrops: MutableLiveData<ArrayList<FarmerCrops>?> =
+    private val _farmerCrops: MutableLiveData<ArrayList<Map<String,FarmerCrops>>?> =
         MutableLiveData(null)
-    val farmerCrops: LiveData<ArrayList<FarmerCrops>?>
+    val farmerCrops: LiveData<ArrayList<Map<String,FarmerCrops>>?>
         get() = _farmerCrops
 
     fun getFarmerCrops(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore) {
         firebaseFirestore.collection("Crops").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val farmersCrops: ArrayList<FarmerCrops> = arrayListOf()
+                    val farmersCrops: ArrayList<Map<String,FarmerCrops>> = arrayListOf()
                     for (document in task.result) {
-                        farmersCrops.add(document.toObject(FarmerCrops::class.java))
-                        Log.i("Crop Id",document.id)
+                        val map= mapOf(document.id to document.toObject(FarmerCrops::class.java))
+                        farmersCrops.add(map)
                     }
                     _farmerCrops.postValue(farmersCrops)
 
