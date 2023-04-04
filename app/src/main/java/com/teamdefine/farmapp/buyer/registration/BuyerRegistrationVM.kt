@@ -22,8 +22,9 @@ class BuyerRegistrationVM : ViewModel() {
     private val _savedBuyerSuccess: MutableLiveData<Boolean?> = MutableLiveData(null)
     val savedBuyerSuccess: LiveData<Boolean?>
         get() = _savedBuyerSuccess
+
     fun saveIdCard(fileName: String?, fileUri: Uri) {
-        val storageRef=Firebase.storage.reference.child("buyer/identification/$fileName")
+        val storageRef = Firebase.storage.reference.child("buyer/identification/$fileName")
         storageRef.putFile(fileUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener {
                 _savedDocUri.postValue(it)
@@ -32,10 +33,11 @@ class BuyerRegistrationVM : ViewModel() {
         }
     }
 
-    fun saveBuyerToDatabase(currentBuyer: MutableMap<String, Any>,
-                            firebaseFirestore: FirebaseFirestore,
-                            firebaseAuth: FirebaseAuth)
-    {
+    fun saveBuyerToDatabase(
+        currentBuyer: MutableMap<String, Any>,
+        firebaseFirestore: FirebaseFirestore,
+        firebaseAuth: FirebaseAuth
+    ) {
         firebaseFirestore.collection("Buyers").document(firebaseAuth.currentUser?.uid.toString())
             .set(currentBuyer)
             .addOnSuccessListener {

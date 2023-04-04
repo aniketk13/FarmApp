@@ -14,7 +14,7 @@
         android:id="@+id/buyerRegistration"
         android:name="com.teamdefine.farmapp.buyer.registration.BuyerRegistration"
         android:label="fragment_buyer_registration"
-        tools:layout="@layout/fragment_buyer_registration" >
+        tools:layout="@layout/fragment_buyer_registration">
         <action
             android:id="@+id/action_buyerRegistration_to_buyerHomeScreen"
             app:destination="@id/buyerHomeScreen" />

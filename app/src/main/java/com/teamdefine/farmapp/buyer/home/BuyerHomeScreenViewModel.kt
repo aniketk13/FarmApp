@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.buyer.models.BuyerData
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
-import com.teamdefine.farmapp.farmer.models.FarmerData
 
 class BuyerHomeScreenViewModel : ViewModel() {
 
@@ -20,6 +19,7 @@ class BuyerHomeScreenViewModel : ViewModel() {
         MutableLiveData(null)
     val farmerCrops: LiveData<ArrayList<FarmerCrops>?>
         get() = _farmerCrops
+
     fun getFarmerCrops(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore) {
         firebaseFirestore.collection("Crops").get()
             .addOnCompleteListener { task ->
