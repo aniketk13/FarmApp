@@ -62,7 +62,7 @@ class LanguageSelectionFragment : Fragment() {
 
     private fun createArrayListOfLanguages(): ArrayList<AppLanguageModel> {
         val arrayOfLanguages: ArrayList<AppLanguageModel> = arrayListOf()
-        val langEnglish = AppLanguageModel("E", "English", "en")
+        val langEnglish = AppLanguageModel("A", "English", "en")
         val langHindi = AppLanguageModel("ह", "Hindi", "hi")
 
         arrayOfLanguages.add(langEnglish)
