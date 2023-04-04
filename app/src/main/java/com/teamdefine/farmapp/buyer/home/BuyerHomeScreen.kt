@@ -82,7 +82,8 @@ class BuyerHomeScreen : Fragment() {
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-
+        if (binding.swipeRefresh.isRefreshing)
+            binding.swipeRefresh.isRefreshing = false
     }
 
     private fun navigateToBiddingScreen(clickedCropKey: String) {
@@ -94,6 +95,14 @@ class BuyerHomeScreen : Fragment() {
     }
 
     private fun initClickListeners() {
+        binding.swipeRefresh.setOnRefreshListener {
+            getBuyerData()
+        }
+    }
+
+    private fun getBuyerData() {
+        viewModel.getBuyerData(firebaseAuth, firebaseFirestore)
+        viewModel.getFarmerCrops(firebaseAuth, firebaseFirestore)
     }
 
 }
