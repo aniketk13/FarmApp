@@ -111,8 +111,9 @@ class FarmerRegistration : Fragment() {
             farmer["Name"] = it.displayName.toString()
             farmer["Email"] = it.email.toString()
             farmer["MobileNumber"] = "+91-${binding.inputPhone.text}"
-            farmer["LandSize"] = binding.inputLandSize.text
+            farmer["LandSize"] = binding.inputLandSize.text.toString().toInt()
             farmer["SoilReportURI"] = savedDocUri.toString()
+            farmer["LanguagePreference"] = (activity as MainFarmerActivity).languagePref.toString()
             farmer["ClosedDeals"] = 0
             farmer["ActiveDeals"] = 0
 

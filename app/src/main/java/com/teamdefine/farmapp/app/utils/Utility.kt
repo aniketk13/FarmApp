@@ -1,6 +1,7 @@
 package com.teamdefine.farmapp.app.utils
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -55,5 +56,34 @@ object Utility {
             3, 23 -> "rd"
             else -> "th"
         }
+    }
+
+    fun Context.updateLocale(language: String): Context {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+//            return updateResourcesLocale(this, locale)
+//        }
+
+        return updateResourcesLocaleLegacy(this, locale)
+    }
+
+    fun Fragment.updateLocale(language: String): Context {
+        return requireContext().updateLocale(language)
+    }
+
+    private fun updateResourcesLocaleLegacy(context: Context, locale: Locale): Context {
+        val resources = context.resources
+        val configuration = resources.configuration
+        configuration.locale = locale
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+        return context
+    }
+
+    private fun updateResourcesLocale(context: Context, locale: Locale): Context {
+        val configuration = Configuration(context.resources.configuration)
+        configuration.setLocale(locale)
+        return context.createConfigurationContext(configuration)
     }
 }
