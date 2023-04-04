@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.teamdefine.farmapp.R
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.buyer.MainBuyerActivity
@@ -38,7 +39,7 @@ class BuyerRegistration : Fragment() {
         binding=it
         firebaseAuth=FirebaseAuth.getInstance()
         firebaseFirestore=FirebaseFirestore.getInstance()
-
+        progressDialog = ProgressDialog(requireContext())
         if((activity as MainBuyerActivity).isRegistered==true)
             navigateToHomeScreen()
 
@@ -49,8 +50,19 @@ class BuyerRegistration : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         initClickListeners()
         initObservers()
+    }
+
+    private fun initViews() {
+            firebaseAuth.currentUser?.let {
+                binding.apply {
+                    inputName.setText(it.displayName)
+                    inputEmail.setText(it.email)
+                    inputEmail.isFocusable=false
+                }
+            }
     }
 
     private fun initObservers() {
@@ -66,6 +78,14 @@ class BuyerRegistration : Fragment() {
                     navigateToHomeScreen()
                 } else {
                     toast("Some error occoured")
+                }
+            }
+        }
+        buyerRegistrationVM.progressDialog.observe(requireActivity()){ ifShowProgessDialog ->
+            ifShowProgessDialog?.let {
+                if (!it) {
+                    if (progressDialog.isShowing)
+                        progressDialog.dismiss()
                 }
             }
         }
@@ -113,7 +133,7 @@ class BuyerRegistration : Fragment() {
 
     private fun uploadDocument() {
         val intent = Intent().setType("*/*").setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "Select a file"),1)
+        startActivityForResult(Intent.createChooser(intent, "Select a file"),777)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
