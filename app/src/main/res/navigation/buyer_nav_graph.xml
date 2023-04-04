@@ -9,7 +9,14 @@
         android:id="@+id/buyerHomeScreen"
         android:name="com.teamdefine.farmapp.buyer.home.BuyerHomeScreen"
         android:label="fragment_buyer_home_screen"
-        tools:layout="@layout/fragment_buyer_home_screen" />
+        tools:layout="@layout/fragment_buyer_home_screen">
+        <action
+            android:id="@+id/action_buyerHomeScreen_to_buyerBidding"
+            app:destination="@id/buyerBidding" />
+        <action
+            android:id="@+id/action_buyerHomeScreen_to_buyerBidding2"
+            app:destination="@id/buyerBidding" />
+    </fragment>
     <fragment
         android:id="@+id/buyerRegistration"
         android:name="com.teamdefine.farmapp.buyer.registration.BuyerRegistration"
@@ -19,4 +26,9 @@
             android:id="@+id/action_buyerRegistration_to_buyerHomeScreen"
             app:destination="@id/buyerHomeScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/buyerBidding"
+        android:name="com.teamdefine.farmapp.buyer.bidding.BuyerBidding"
+        android:label="fragment_buyer_bidding"
+        tools:layout="@layout/fragment_buyer_bidding" />
 </navigation>
