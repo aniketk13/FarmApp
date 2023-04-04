@@ -61,7 +61,7 @@ class BuyerHomeScreen : Fragment() {
         }
         viewModel.buyerData.observe(requireActivity()) {
             it?.let {
-                binding.nameTv.text = it.Name
+                binding.nameTv.text = "Hello ${it.Name}"
                 binding.activeBids.text = "${it.ActiveBids.toString()} Active Bids"
                 binding.closedBids.text = "${it.ClosedBids.toString()} Closed Bids"
             }

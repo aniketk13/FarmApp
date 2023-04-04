@@ -119,7 +119,7 @@ class BuyerRegistration : Fragment() {
             buyer["Personal ID"] = buyerDocUri.toString()
             buyer["ClosedBids"] = 0
             buyer["ActiveBids"] = 0
-
+            buyer["LanguagePreference"] = (activity as MainBuyerActivity).languagePref.toString()
             saveBuyerToDatabase(buyer)
         }
     }
