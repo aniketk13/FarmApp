@@ -34,7 +34,6 @@ class CreateNewCropListing : Fragment() {
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var progressDialog: ProgressDialog
     private val viewModel: CreateNewCropVM by viewModels()
-    private val mainFarmerVM: MainFarmerVM by activityViewModels()
     private var savedDocUri: Uri? = null
 
     override fun onCreateView(
