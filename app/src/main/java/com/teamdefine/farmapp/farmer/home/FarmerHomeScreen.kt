@@ -168,7 +168,7 @@ class FarmerHomeScreen : Fragment() {
     }
 
     private fun navigateToMainActivity() {
-        startActivity(Intent(activity,MainActivity::class.java))
+        startActivity(Intent(activity, MainActivity::class.java))
         activity?.finish()
     }
 
