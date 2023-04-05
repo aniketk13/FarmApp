@@ -126,8 +126,12 @@ class FarmerHomeScreen : Fragment() {
             binding.swipeRefresh.isRefreshing = false
     }
 
-    private fun navigateToCropBids(cropId:String) {
-        findNavController().navigate(FarmerHomeScreenDirections.actionFarmerHomeScreenToFarmerCropBids(cropId))
+    private fun navigateToCropBids(cropId: String) {
+        findNavController().navigate(
+            FarmerHomeScreenDirections.actionFarmerHomeScreenToFarmerCropBids(
+                cropId
+            )
+        )
     }
 
     private fun setUpDataInViews(farmersData: FarmerData? = null) {

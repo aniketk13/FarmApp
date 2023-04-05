@@ -35,7 +35,7 @@
                     android:text="Current Bid Price"
                     android:textSize="22sp" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/bidAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -47,7 +47,7 @@
                     android:textColor="#24AF29"
                     android:textSize="20sp" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/nameOfBuyer"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"

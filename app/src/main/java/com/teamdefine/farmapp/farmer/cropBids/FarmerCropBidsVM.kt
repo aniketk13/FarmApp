@@ -16,7 +16,7 @@ class FarmerCropBidsVM : ViewModel() {
     val crop: LiveData<FarmerCrops>
         get() = _crop
 
-    fun getCrop(database:FirebaseFirestore,cropId: String?) {
+    fun getCrop(database: FirebaseFirestore, cropId: String?) {
         database.collection("Crops").document(cropId!!).get()
             .addOnCompleteListener {
                 _crop.postValue(it.result.toObject(FarmerCrops::class.java))
@@ -24,12 +24,13 @@ class FarmerCropBidsVM : ViewModel() {
     }
 
     fun getBids(database: FirebaseFirestore, cropId: String?) {
-        var bids:ArrayList<BiddingData>?= arrayListOf()
-        database.collection("Bidding").whereEqualTo("CropId",cropId).get()
+        var bids: ArrayList<BiddingData> = arrayListOf()
+        database.collection("Bidding").whereEqualTo("CropId", cropId).get()
             .addOnCompleteListener {
-                for(document in it.result){
-                    bids?.add(document.toObject(BiddingData::class.java))
+                for (document in it.result) {
+                    bids.add(document.toObject(BiddingData::class.java))
                 }
+                _cropBids.postValue(bids)
             }
     }
 }

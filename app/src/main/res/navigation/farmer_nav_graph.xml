@@ -39,7 +39,7 @@
         android:id="@+id/farmerCropBids"
         android:name="com.teamdefine.farmapp.farmer.cropBids.FarmerCropBids"
         android:label="fragment_farmer_crop_bids"
-        tools:layout="@layout/fragment_farmer_crop_bids" >
+        tools:layout="@layout/fragment_farmer_crop_bids">
         <argument
             android:name="cropId"
             app:argType="string" />

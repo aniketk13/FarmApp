@@ -11,6 +11,8 @@ class BiddingData {
         private set
     var BuyerBid: Long? = null
         private set
+    var BuyerName: String? = null
+        private set
 
     init {
         this.BidId = BidId
@@ -18,5 +20,6 @@ class BiddingData {
         this.CropId = CropId
         this.FarmerBid = FarmerBid
         this.BuyerBid = BuyerBid
+        this.BuyerName = BuyerName
     }
 }

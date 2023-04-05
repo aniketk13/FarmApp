@@ -31,6 +31,7 @@ class BuyerBidding : Fragment() {
     val bid: MutableMap<String, Any> = HashMap()
     private var currentCrop: FarmerCrops? = null
     private var buyerId: String? = null
+    private var buyerName: String? = null
     private var bidId: String? = null
     private var farmerId: String? = null
 
@@ -43,6 +44,7 @@ class BuyerBidding : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         buyerId = firebaseAuth.currentUser?.uid
+        buyerName = firebaseAuth.currentUser?.displayName
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -167,6 +169,7 @@ class BuyerBidding : Fragment() {
         bid["CropId"] = cropKey!!
         bid["FarmerBid"] = currentCrop?.CropOfferPrice!!
         bid["BuyerBid"] = buyerBid
+        bid["BuyerName"] = buyerName!!
         updateBuyerActiveBids(buyerId!!)
         updateFarmerActiveDeals(farmerId!!)
         viewModel.addBidToDatabase(database, bid)

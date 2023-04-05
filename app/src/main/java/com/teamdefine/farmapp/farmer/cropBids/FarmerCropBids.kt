@@ -15,7 +15,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.app.utils.Utility.loadImageUsingGlide
 import com.teamdefine.farmapp.buyer.bidding.models.BiddingData
 import com.teamdefine.farmapp.databinding.FragmentFarmerCropBidsBinding
-import com.teamdefine.farmapp.farmer.home.FarmerHomeScreenAdapter
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
 
 class FarmerCropBids : Fragment() {
@@ -53,21 +52,22 @@ class FarmerCropBids : Fragment() {
     }
 
     private fun getBids() {
-        viewModel.getBids(database,cropId)
+        viewModel.getBids(database, cropId)
     }
 
     private fun getCrop() {
-        viewModel.getCrop(database,cropId)
+        viewModel.getCrop(database, cropId)
     }
 
     private fun initObservers() {
-        viewModel.crop.observe(requireActivity()){
+        viewModel.crop.observe(requireActivity()) {
             it?.let {
                 showCropDetails(it)
             }
         }
-        viewModel.cropBids.observe(requireActivity()){
+        viewModel.cropBids.observe(requireActivity()) {
             it?.let {
+                Log.i("FarmerCropBids", "Inside Crop Bids Observer")
                 setupDataInRecyclerView(it)
             }
         }
@@ -76,31 +76,32 @@ class FarmerCropBids : Fragment() {
     private fun setupDataInRecyclerView(cropBids: ArrayList<BiddingData>) {
         adapter = activity?.let {
             FarmerCropBidsAdapter(
-                it,
                 cropBids,
                 object : FarmerCropBidsAdapter.ItemClickListener {
                     override fun onItemClickListener(clickedCropBid: BiddingData) {
-                        Log.i("FarmerCropBids", clickedCropBid.CropId.toString())
+                        Log.i("FarmerCropBids", clickedCropBid.BidId.toString())
                     }
                 })
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-//        if (binding.swipeRefresh.isRefreshing)
-//            binding.swipeRefresh.isRefreshing = false
+        if (binding.swipeRefresh.isRefreshing)
+            binding.swipeRefresh.isRefreshing = false
     }
 
     private fun showCropDetails(crop: FarmerCrops) {
         binding.apply {
             cropNameTv.text = crop.CropName
             requireContext().loadImageUsingGlide(crop.CropImageURI.toString(), cropIv)
-            farmerNameTv.text=crop.FarmerName
-            dateTv.text=crop.CropListingDate
-            priceOfCrop.text=crop.CropOfferPrice.toString()
+            farmerNameTv.text = crop.FarmerName
+            dateTv.text = crop.CropListingDate
+            priceOfCrop.text = crop.CropOfferPrice.toString()
         }
     }
 
     private fun initClickListeners() {
-        TODO("Not yet implemented")
+        binding.swipeRefresh.setOnRefreshListener {
+            initViews()
+        }
     }
 }
