@@ -6,75 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".buyer.home.BuyerHomeScreen">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/nameTv"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/noto_devnagri"
-        android:padding="15dp"
-        android:text="Hello, Nitish"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/topLl"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nameCL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameTv">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/activeBids"
-            android:layout_width="170dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="#24AF29"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/noto_devnagri"
-            android:text="Active bids"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="15dp"
+            android:text="Hello, Nitish"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/outerLl" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/closedBids"
-            android:layout_width="170dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="#FBBC05"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/helloShakeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/noto_devnagri"
-            android:text="Closed bids"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="  👋🏻"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nameTv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/outerLl" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/activeRoomsTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bidsCount"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/noto_devnagri"
-        android:text="Active Bids"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topLl" />
+        app:layout_constraintTop_toBottomOf="@id/nameCL">
+
+        <View
+            android:id="@+id/activeBids"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bg_green"
+            android:fontFamily="@font/noto_devnagri"
+            android:gravity="center"
+            android:padding="25dp"
+            android:text="@string/deals_closed"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/closedBids"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/activeBids"
+            app:layout_constraintEnd_toEndOf="@+id/activeBids"
+            app:layout_constraintStart_toStartOf="@+id/activeBids"
+            app:layout_constraintTop_toTopOf="@+id/activeBids">
+
+            <TextView
+                android:id="@+id/activeBidsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_devnagri"
+                android:gravity="center"
+                android:text="@string/active_bids"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/activeBidsCountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_devnagri"
+                android:gravity="center"
+                android:textColor="@color/theme_yellow"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="7" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/closedBids"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bg_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/activeBids"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/closedBids"
+            app:layout_constraintStart_toStartOf="@+id/closedBids"
+            app:layout_constraintTop_toTopOf="@+id/closedBids">
+
+            <TextView
+                android:id="@+id/closedBidsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_devnagri"
+                android:gravity="center"
+                android:text="@string/closed_bids"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/closedBidsCountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_devnagri"
+                android:gravity="center"
+                android:textColor="@color/theme_green"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="15" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/AvailableListingCL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bidsCount">
+
+        <TextView
+            android:id="@+id/activeRoomsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/noto_devnagri"
+            android:padding="12dp"
+            android:text="@string/all_listings"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -85,7 +192,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activeRoomsTv">
+        app:layout_constraintTop_toBottomOf="@id/AvailableListingCL">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"

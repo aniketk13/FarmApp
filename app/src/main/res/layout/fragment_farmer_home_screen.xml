@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@id/nameCl">
 
         <View
-            android:id="@+id/closedBids"
+            android:id="@+id/closedDeals"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border_bg_green"
@@ -93,7 +93,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/activeBids"
+            app:layout_constraintEnd_toStartOf="@+id/activeDeals"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -105,12 +105,12 @@
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/closedBids"
-            app:layout_constraintStart_toStartOf="@+id/closedBids"
-            app:layout_constraintTop_toTopOf="@+id/closedBids">
+            app:layout_constraintEnd_toEndOf="@+id/closedDeals"
+            app:layout_constraintStart_toStartOf="@+id/closedDeals"
+            app:layout_constraintTop_toTopOf="@+id/closedDeals">
 
             <TextView
-                android:id="@+id/closedBidsTv"
+                android:id="@+id/closedDealsTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_devnagri"
@@ -120,7 +120,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/closedBidsCountTv"
+                android:id="@+id/closedDealsCountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_devnagri"
@@ -133,13 +133,13 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/activeBids"
+            android:id="@+id/activeDeals"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border_bg_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/closedBids"
+            app:layout_constraintStart_toEndOf="@id/closedDeals"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -147,13 +147,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/activeBids"
-            app:layout_constraintEnd_toEndOf="@+id/activeBids"
-            app:layout_constraintStart_toStartOf="@+id/activeBids"
-            app:layout_constraintTop_toTopOf="@+id/activeBids">
+            app:layout_constraintBottom_toBottomOf="@+id/activeDeals"
+            app:layout_constraintEnd_toEndOf="@+id/activeDeals"
+            app:layout_constraintStart_toStartOf="@+id/activeDeals"
+            app:layout_constraintTop_toTopOf="@+id/activeDeals">
 
             <TextView
-                android:id="@+id/activeBidsTv"
+                android:id="@+id/activeDealsTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_devnagri"
@@ -163,7 +163,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/activeBidsCountTv"
+                android:id="@+id/activeDealsCountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_devnagri"

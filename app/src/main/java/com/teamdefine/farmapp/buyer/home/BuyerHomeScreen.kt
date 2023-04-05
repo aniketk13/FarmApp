@@ -60,10 +60,12 @@ class BuyerHomeScreen : Fragment() {
             }
         }
         viewModel.buyerData.observe(requireActivity()) {
-            it?.let {
-                binding.nameTv.text = "Hello ${it.Name}"
-                binding.activeBids.text = "${it.ActiveBids.toString()} Active Bids"
-                binding.closedBids.text = "${it.ClosedBids.toString()} Closed Bids"
+            it?.let { buyerData ->
+                binding.apply {
+                    nameTv.text = "Hello, ${buyerData.Name}"
+                    activeBidsCountTv.text = buyerData.ActiveBids.toString()
+                    closedBidsCountTv.text = buyerData.ClosedBids.toString()
+                }
             }
         }
     }

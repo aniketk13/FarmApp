@@ -29,5 +29,8 @@
     <string name="set_app_language">ऐप भाषा सेट करें</string>
     <string name="app_language">ऐप भाषा</string>
     <string name="select_your_preferred_language">अपनी पसंदीदा भाषा का चयन करें</string>
+    <string name="active_bids">सक्रिय बोली</string>
+    <string name="closed_bids">बंद बोली</string>
+    <string name="all_listings">सारी सूचियां</string>
 
 </resources>

@@ -124,8 +124,8 @@ class FarmerHomeScreen : Fragment() {
         farmersData?.let {
             binding.apply {
                 nameTv.text = farmersData.Name
-                closedBidsCountTv.text = farmersData.ClosedDeals.toString()
-                activeBidsCountTv.text = farmersData.ActiveDeals.toString()
+                closedDealsCountTv.text = farmersData.ClosedDeals.toString()
+                activeDealsCountTv.text = farmersData.ActiveDeals.toString()
             }
         }
     }
