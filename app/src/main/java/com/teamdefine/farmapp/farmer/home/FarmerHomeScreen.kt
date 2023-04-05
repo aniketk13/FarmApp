@@ -1,6 +1,8 @@
 package com.teamdefine.farmapp.farmer.home
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.teamdefine.farmapp.MainActivity
+import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.databinding.FragmentFarmerHomeScreenBinding
 import com.teamdefine.farmapp.farmer.main.MainFarmerActivity
 import com.teamdefine.farmapp.farmer.main.MainFarmerVM
@@ -138,8 +142,36 @@ class FarmerHomeScreen : Fragment() {
             swipeRefresh.setOnRefreshListener {
                 getFarmerData()
             }
+            signOut.setOnClickListener {
+                signOutUser()
+            }
         }
     }
+
+    private fun signOutUser() {
+        showAlert()
+    }
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(activity)
+        builder.setMessage("Do you really want to sign out?")
+
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            firebaseAuth.signOut()
+            toast("Signed out successfully")
+            navigateToMainActivity()
+        }
+        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun navigateToMainActivity() {
+        startActivity(Intent(activity,MainActivity::class.java))
+        activity?.finish()
+    }
+
 
     private fun navigateToAddCropListingFragment() {
         findNavController().navigate(FarmerHomeScreenDirections.actionFarmerHomeScreenToCreateNewCropListing())
