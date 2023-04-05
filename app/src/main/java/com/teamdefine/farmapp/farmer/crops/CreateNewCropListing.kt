@@ -111,21 +111,12 @@ class CreateNewCropListing : Fragment() {
         viewModel.savedCropSuccess.observe(requireActivity(), Observer { cropSaved ->
             cropSaved?.let {
                 if (it) {
-                    mainFarmerVM.updateActiveCropsByOne(firebaseAuth, firebaseFirestore)
-                }
-            }
-        })
-        mainFarmerVM.updatedActiveDeals.observe(viewLifecycleOwner, Observer { activeCropsUpdated ->
-            activeCropsUpdated?.let {
-                it.getContentIfNotHandled()?.let { content ->
-                    if (content) {
-                        binding.progressBar.visibility = View.GONE
-                        navigateBackToFarmerHomeFragment()
-                    } else {
-                        binding.progressBar.visibility = View.GONE
-                        toast("Seems like our servers are down. Try again later.")
-                        navigateBackToFarmerHomeFragment()
-                    }
+                    binding.progressBar.visibility = View.GONE
+                    navigateBackToFarmerHomeFragment()
+                }else{
+                    binding.progressBar.visibility = View.GONE
+                    toast("Seems like our servers are down. Try again later.")
+                    navigateBackToFarmerHomeFragment()
                 }
             }
         })

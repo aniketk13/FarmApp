@@ -17,10 +17,6 @@ class MainFarmerVM : ViewModel() {
     val farmerData: LiveData<FarmerData?>
         get() = _farmerData
 
-    private val _updatedActiveDeals: MutableLiveData<Event<Boolean>?> = MutableLiveData(null)
-    val updatedActiveDeals: LiveData<Event<Boolean>?>
-        get() = _updatedActiveDeals
-
     private val _farmerCrops: MutableLiveData<ArrayList<FarmerCrops>?> =
         MutableLiveData(null)
     val farmerCrops: LiveData<ArrayList<FarmerCrops>?>
@@ -41,25 +37,6 @@ class MainFarmerVM : ViewModel() {
             }
             .addOnFailureListener {
                 Log.e("MainFarmerVM Error", it.message.toString())
-            }
-    }
-
-    fun updateActiveCropsByOne(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore) {
-        firebaseFirestore.collection("Farmers").document(firebaseAuth.currentUser?.uid.toString())
-            .get().addOnSuccessListener { document ->
-                if (document != null) {
-                    val currentActiveDeals: Long = document.get("ActiveDeals") as Long
-                    firebaseFirestore.collection("Farmers")
-                        .document(firebaseAuth.currentUser?.uid.toString())
-                        .update("ActiveDeals", currentActiveDeals + 1).addOnSuccessListener {
-                            _updatedActiveDeals.value = Event(true)
-                        }
-                        .addOnFailureListener {
-                            _updatedActiveDeals.value = Event(false)
-                        }
-                } else {
-                    _updatedActiveDeals.value = Event(false)
-                }
             }
     }
 
