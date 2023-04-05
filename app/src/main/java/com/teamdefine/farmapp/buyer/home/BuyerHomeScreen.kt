@@ -1,11 +1,14 @@
 package com.teamdefine.farmapp.buyer.home
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.teamdefine.farmapp.MainActivity
 import com.teamdefine.farmapp.app.utils.Utility.toast
+import com.teamdefine.farmapp.buyer.MainBuyerActivity
 import com.teamdefine.farmapp.databinding.FragmentBuyerHomeScreenBinding
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
 
@@ -97,9 +102,40 @@ class BuyerHomeScreen : Fragment() {
     }
 
     private fun initClickListeners() {
-        binding.swipeRefresh.setOnRefreshListener {
-            getBuyerData()
+        binding.apply {
+            swipeRefresh.setOnRefreshListener {
+                getBuyerData()
+            }
+            signOut.setOnClickListener {
+                signOutUser()
+            }
         }
+    }
+
+    private fun signOutUser() {
+        showAlert()
+    }
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(activity)
+        builder.setMessage("Do you really want to sign out?")
+
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            firebaseAuth.signOut()
+            toast("Signed out successfully")
+            navigateToMainActivity()
+        }
+        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun navigateToMainActivity() {
+        startActivity(
+            Intent(activity, MainActivity::class.java)
+        )
+        activity?.finish()
     }
 
     private fun getBuyerData() {

@@ -81,10 +81,10 @@ class OnBoardingFragment : Fragment() {
             it?.let { isFarmer ->
                 if (isFarmer) {
                     isUserFarmer = true
-                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Farmer")
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Farmers")
                 } else {
                     isUserBuyer = true
-                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Buyer")
+                    getLanguagePreference(firebaseAuth, firebaseFirestore, "Buyers")
                 }
             }
         })
