@@ -116,6 +116,7 @@ class FarmerHomeScreen : Fragment() {
                 object : FarmerHomeScreenAdapter.ItemClickListener {
                     override fun onItemClickListener(clickedFarmerCrop: FarmerCrops) {
                         Log.i("FarmerHomeScreen", clickedFarmerCrop.CropId.toString())
+                        navigateToCropBids(clickedFarmerCrop.CropId!!)
                     }
                 })
         }
@@ -123,6 +124,10 @@ class FarmerHomeScreen : Fragment() {
         binding.cropRecyclerView.layoutManager = LinearLayoutManager(activity)
         if (binding.swipeRefresh.isRefreshing)
             binding.swipeRefresh.isRefreshing = false
+    }
+
+    private fun navigateToCropBids(cropId:String) {
+        findNavController().navigate(FarmerHomeScreenDirections.actionFarmerHomeScreenToFarmerCropBids(cropId))
     }
 
     private fun setUpDataInViews(farmersData: FarmerData? = null) {

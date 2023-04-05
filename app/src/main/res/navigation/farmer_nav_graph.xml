@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_farmerHomeScreen_to_createNewCropListing"
             app:destination="@id/createNewCropListing" />
+        <action
+            android:id="@+id/action_farmerHomeScreen_to_farmerCropBids"
+            app:destination="@id/farmerCropBids" />
     </fragment>
     <fragment
         android:id="@+id/createNewCropListing"
@@ -31,5 +34,14 @@
         <action
             android:id="@+id/action_createNewCropListing_to_farmerHomeScreen"
             app:destination="@id/farmerHomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/farmerCropBids"
+        android:name="com.teamdefine.farmapp.farmer.cropBids.FarmerCropBids"
+        android:label="fragment_farmer_crop_bids"
+        tools:layout="@layout/fragment_farmer_crop_bids" >
+        <argument
+            android:name="cropId"
+            app:argType="string" />
     </fragment>
 </navigation>
