@@ -1,6 +1,8 @@
 package com.teamdefine.farmapp.farmer.models
 
 class FarmerCrops {
+    var CropId: String? = null
+        private set
     var CropImageURI: String? = null
         private set
     var CropListingDate: String? = null
@@ -15,6 +17,7 @@ class FarmerCrops {
         private set
 
     init {
+        this.CropId = CropId
         this.CropImageURI = CropImageURI
         this.CropListingDate = CropListingDate
         this.CropName = CropName

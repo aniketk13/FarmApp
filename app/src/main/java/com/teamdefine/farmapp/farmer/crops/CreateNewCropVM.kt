@@ -47,6 +47,7 @@ class CreateNewCropVM : ViewModel() {
         crop: MutableMap<String, Any>
     ) {
         val randomId = Utility.generateUUID()
+        crop["CropId"] = "${firebaseAuth.currentUser?.uid}-$randomId"
         firebaseFirestore.collection("Crops").document("${firebaseAuth.currentUser?.uid}-$randomId")
             .set(crop)
             .addOnSuccessListener {

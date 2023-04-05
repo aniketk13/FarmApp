@@ -115,6 +115,7 @@ class FarmerHomeScreen : Fragment() {
                 farmerCrops,
                 object : FarmerHomeScreenAdapter.ItemClickListener {
                     override fun onItemClickListener(clickedFarmerCrop: FarmerCrops) {
+                        Log.i("FarmerHomeScreen", clickedFarmerCrop.CropId.toString())
                     }
                 })
         }
