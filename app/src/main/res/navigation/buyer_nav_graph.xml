@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/buyer_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buyer_nav_graph"
+    app:startDestination="@id/buyerRegistration">
 
+    <fragment
+        android:id="@+id/buyerHomeScreen"
+        android:name="com.teamdefine.farmapp.buyer.home.BuyerHomeScreen"
+        android:label="fragment_buyer_home_screen"
+        tools:layout="@layout/fragment_buyer_home_screen">
+        <action
+            android:id="@+id/action_buyerHomeScreen_to_buyerBidding"
+            app:destination="@id/buyerBidding" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerRegistration"
+        android:name="com.teamdefine.farmapp.buyer.registration.BuyerRegistration"
+        android:label="fragment_buyer_registration"
+        tools:layout="@layout/fragment_buyer_registration">
+        <action
+            android:id="@+id/action_buyerRegistration_to_buyerHomeScreen"
+            app:destination="@id/buyerHomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerBidding"
+        android:name="com.teamdefine.farmapp.buyer.bidding.BuyerBidding"
+        android:label="fragment_buyer_bidding"
+        tools:layout="@layout/fragment_buyer_bidding">
+        <argument
+            android:name="cropKey"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_buyerBidding_to_buyerHomeScreen"
+            app:destination="@id/buyerHomeScreen" />
+    </fragment>
 </navigation>

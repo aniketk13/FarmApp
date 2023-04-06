@@ -1,2 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">कृषि सहयोग</string>
+    <string name="terms_and_conditions">प्रमाणित करके मैं\n<b>शर्तें &amp; स्थितियाँ </b>से सहमत हूं </string>
+    <string name="google_authenticate_button_text">जारी रखने के लिए प्रमाणित करें</string>
+    <string name="who_are_you">आप कौन हैं?</string>
+    <string name="farmer">मैं एक किसान हूँ</string>
+    <string name="buyer">मैं एक खरीदार हूँ</string>
+    <string name="fill_your_details">अपना विवरण भरें</string>
+    <string name="your_name">आपका नाम</string>
+    <string name="your_email">आपका ईमेल</string>
+    <string name="your_phone_number">आपका फोन नंबर</string>
+    <string name="upload_your_field_s_latest_soil_report">नवीनतम मिट्टी की रिपोर्ट</string>
+    <string name="submit">जमा करें</string>
+    <string name="your_land_size_in_acres">आपकी जमीन का आकार एकड़ में</string>
+    <string name="upload_report">अपलोड करें</string>
+    <string name="hello">नमस्ते,</string>
+    <string name="deals_closed">बंद सौदे</string>
+    <string name="active_deals">सक्रिय सौदे</string>
+    <string name="current_listings">वर्तमान फसल लिस्टिंग</string>
+    <string name="price">कीमत:</string>
+    <string name="create_a_new_crop_listing">एक नई फसल सूची बनाएँ</string>
+    <string name="crop_name">फसल का नाम</string>
+    <string name="offer_price">रखी गयी क़ीमत</string>
+    <string name="images">फसल की तस्वीरें</string>
+    <string name="add_crop_to_listing">लिस्टिंग में फसल जोड़ें</string>
+    <string name="quintal">क्विंटल</string>
+    <string name="personal_id_card">व्यक्तिगत पहचान पत्र</string>
+    <string name="set_app_language">ऐप भाषा सेट करें</string>
+    <string name="app_language">ऐप भाषा</string>
+    <string name="select_your_preferred_language">अपनी पसंदीदा भाषा का चयन करें</string>
+    <string name="active_bids">सक्रिय बोली</string>
+    <string name="closed_bids">बंद बोली</string>
+    <string name="all_listings">सारी सूचियां</string>
+
+</resources>
