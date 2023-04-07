@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.teamdefine.farmapp.app.utils.Event
 import com.teamdefine.farmapp.farmer.models.FarmerCrops
 import com.teamdefine.farmapp.farmer.models.FarmerData
 

@@ -67,13 +67,15 @@ class SplashFragment : Fragment() {
 
         mainActivityVM?.userLanguagePref?.observe(requireActivity(), Observer { languagePref ->
             languagePref?.let {
-                Handler().postDelayed({
-                    if (isUserFarmer) {
-                        startFarmerActivity(it)
-                    } else {
-                        startBuyerActivity(it)
-                    }
-                }, 2000)
+                it.getContentIfNotHandled()?.let { lang ->
+                    Handler().postDelayed({
+                        if (isUserFarmer) {
+                            startFarmerActivity(lang)
+                        } else {
+                            startBuyerActivity(lang)
+                        }
+                    }, 2000)
+                }
             }
         })
     }

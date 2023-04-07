@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.teamdefine.farmapp.app.utils.Utility
 import com.teamdefine.farmapp.app.utils.Utility.toast
 import com.teamdefine.farmapp.databinding.FragmentCreateNewCropListingBinding
-import com.teamdefine.farmapp.farmer.main.MainFarmerVM
 
 class CreateNewCropListing : Fragment() {
     private lateinit var binding: FragmentCreateNewCropListingBinding
@@ -112,7 +110,7 @@ class CreateNewCropListing : Fragment() {
                 if (it) {
                     binding.progressBar.visibility = View.GONE
                     navigateBackToFarmerHomeFragment()
-                }else{
+                } else {
                     binding.progressBar.visibility = View.GONE
                     toast("Seems like our servers are down. Try again later.")
                     navigateBackToFarmerHomeFragment()
