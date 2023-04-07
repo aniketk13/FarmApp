@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.teamdefine.farmapp.app.utils.Event
 
 class MainActivityVM : ViewModel() {
     private val _userIsFarmer: MutableLiveData<Boolean?> = MutableLiveData(null)
@@ -16,9 +17,14 @@ class MainActivityVM : ViewModel() {
     val progressLoad: LiveData<Boolean?>
         get() = _progressLoad
 
-    private val _userLanguagePref: MutableLiveData<String?> =
+//    private val _userLanguagePref: MutableLiveData<String?> =
+//        MutableLiveData(null)
+//    val userLanguagePref: LiveData<String?>
+//        get() = _userLanguagePref
+
+    private val _userLanguagePref: MutableLiveData<Event<String?>> =
         MutableLiveData(null)
-    val userLanguagePref: LiveData<String?>
+    val userLanguagePref: LiveData<Event<String?>>
         get() = _userLanguagePref
 
     fun checkIfUserIsFarmerOrBuyer(
@@ -56,7 +62,7 @@ class MainActivityVM : ViewModel() {
             .get().addOnSuccessListener { document ->
                 val languagePref: String = document.get("LanguagePreference") as String
                 _progressLoad.postValue(false)
-                _userLanguagePref.postValue(languagePref)
+                _userLanguagePref.value = Event(languagePref)
             }.addOnFailureListener {
                 _progressLoad.postValue(false)
                 Log.e("MainActivityVM Auth", "Error: ", it)

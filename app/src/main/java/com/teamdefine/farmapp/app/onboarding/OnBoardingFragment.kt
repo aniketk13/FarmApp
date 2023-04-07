@@ -91,10 +91,12 @@ class OnBoardingFragment : Fragment() {
 
         mainActivityVM?.userLanguagePref?.observe(requireActivity(), Observer { languagePref ->
             languagePref?.let {
-                if (isUserFarmer) {
-                    startFarmerActivity(true, languagePref)
-                } else {
-                    startBuyerActivity(true, languagePref)
+                it.getContentIfNotHandled()?.let { lang ->
+                    if (isUserFarmer) {
+                        startFarmerActivity(true, lang)
+                    } else {
+                        startBuyerActivity(true, lang)
+                    }
                 }
             }
         })
