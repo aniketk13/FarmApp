@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:hint="Your name"
+                android:hint="@string/your_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:hint="Your email"
+                android:hint="@string/your_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -109,15 +109,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:hint="Your phone number"
+                android:hint="@string/your_phone_number"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:prefixText="+91-">
 
                 <EditText
                     android:id="@+id/inputPhone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="phone"
+                    android:maxLength="10"
                     tools:text="9876543210" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,7 +175,7 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="#FF6D24"
             android:fontFamily="@font/noto_devnagri"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
